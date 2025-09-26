@@ -1,68 +1,225 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* ------------------ Resets ------------------ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+*:focus-visible {
+  outline: 3px solid #6366f1; /* Indigo accent */
+  outline-offset: 2px;
 }
-a:hover {
-  color: #535bf2;
+html {
+  font: 62.5% / 1.15 system-ui, sans-serif;
 }
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+h1,
+h2 {
+  margin-bottom: 0;
 }
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+ul {
+  list-style: none;
+  padding: 0;
 }
-
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  appearance: none;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  margin: 0;
+  padding: 0;
   cursor: pointer;
-  transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
+button::-moz-focus-inner {
+  border: 0;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+}
+body {
+  background-color: #f9fafb; /* light gray background */
+  color: #1f2937; /* slate-800 */
+  font: 1.6rem/1.5 system-ui, sans-serif;
+  margin: 0 auto;
+  max-width: 68rem;
+  padding: 2rem;
+}
+@media screen and (min-width: 620px) {
+  body {
+    font-size: 1.9rem;
+    line-height: 1.6;
+  }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+/* ------------------ Global styles ------------------ */
+.form-group > input[type="text"] {
+  display: inline-block;
+  margin-top: 0.4rem;
+}
+
+.btn {
+  border-radius: 0.8rem;
+  border: 2px solid #d1d5db; /* gray-300 */
+  padding: 0.8rem 1.2rem;
+  background: white;
+  transition: all 0.2s ease;
+}
+.btn:hover {
+  background: #f3f4f6; /* gray-100 */
+}
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn.toggle-btn[aria-pressed="true"] {
+  background: #6366f1; /* indigo-500 */
+  border-color: #4f46e5;
+  color: white;
+}
+
+.btn__danger {
+  background-color: #ef4444; /* red-500 */
+  border-color: #dc2626;
+  color: white;
+}
+.btn__danger:hover {
+  background-color: #dc2626;
+}
+
+.btn__primary {
+  background-color: #10b981; /* emerald-500 */
+  border-color: #059669;
+  color: white;
+}
+.btn__primary:hover {
+  background-color: #059669;
+}
+
+.btn-group {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.label-wrapper {
+  flex: 0 0 100%;
+  margin: 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.visually-hidden {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px;
+}
+
+/* ------------------ Spacing utilities ------------------ */
+[class*="stack"] > * {
+  margin: 0;
+}
+
+.stack-small > * + * {
+  margin-top: 1.25rem;
+}
+.stack-large > * + * {
+  margin-top: 2.5rem;
+}
+@media screen and (min-width: 550px) {
+  .stack-small > * + * {
+    margin-top: 1.4rem;
   }
-  a:hover {
-    color: #747bff;
+  .stack-large > * + * {
+    margin-top: 2.8rem;
   }
-  button {
-    background-color: #f9f9f9;
+}
+.stack-exception {
+  margin-top: 1.2rem;
+}
+
+/* ------------------ General app styles ------------------ */
+.todoapp {
+  background: white;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+}
+@media screen and (min-width: 550px) {
+  .todoapp {
+    padding: 4rem;
   }
+}
+.todoapp > h1 {
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #111827; /* slate-900 */
+}
+
+.label__lg {
+  font-weight: 500;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  text-align: center;
+}
+.input__lg {
+  border: 2px solid #d1d5db;
+  border-radius: 0.8rem;
+  padding: 1.2rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input__lg:focus-visible {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+}
+[class*="__lg"] {
+  font-size: 1.9rem;
+  width: 100%;
+}
+@media screen and (min-width: 620px) {
+  [class*="__lg"] {
+    font-size: 2.2rem;
+  }
+}
+
+/* ------------------ Todo item styles ------------------ */
+.todo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.2rem;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.8rem;
+  background: #f9fafb;
+  transition: background 0.2s ease;
+}
+.todo:hover {
+  background: #f3f4f6;
+}
+
+/* ------------------ Checkbox styles ------------------ */
+.c-cb {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+.c-cb > input[type="checkbox"] {
+  cursor: pointer;
+  margin-right: 0.8rem;
+  width: 1.6rem;
+  height: 1.6rem;
+  accent-color: #6366f1; /* modern checkbox color */
+}
+.c-cb > label {
+  cursor: pointer;
+  font-size: 1.6rem;
 }
