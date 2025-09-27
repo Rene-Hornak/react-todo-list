@@ -31,6 +31,13 @@ export default function App(props) {
         setTasks(updatedTasks); // Update the state with the modified list
     }
 
+    // Function to delete task based on id 
+    // delete task from the app's state as well in the app UI
+    function deleteTask(id) {
+        const remainingTasks = tasks.filter((task) => id !== task.id);
+        setTasks(remainingTasks);
+    }
+
     // Create an array of <Todo /> components from the task list
     const taskList = tasks?.map((task) => (
         <Todo 
@@ -39,6 +46,7 @@ export default function App(props) {
             completed={task.completed} 
             key={task.id}
             toggleTaskCompleted={toggleTaskCompleted}
+            deleteTask={deleteTask}
         />
     ));
 
