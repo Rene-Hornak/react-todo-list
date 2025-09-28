@@ -31,6 +31,21 @@ export default function App(props) {
         setTasks(updatedTasks); // Update the state with the modified list
     }
 
+    // Function to edit task based on id
+    // newName property is for new name of task
+    function editTask(id, newName) {
+        const editedTaskList = tasks.map((task) => {
+            // If this task has the same ID as the edited task
+            if (id === task.id) {
+                // Copy the task and update its name
+                return { ...task, name: newName };
+            }
+            // Return the original task if it's not the edited task
+            return task;
+        });
+        setTasks(editedTaskList); // Update the state with the modified list
+    }
+
     // Function to delete task based on id 
     // delete task from the app's state as well in the app UI
     function deleteTask(id) {
@@ -47,6 +62,7 @@ export default function App(props) {
             key={task.id}
             toggleTaskCompleted={toggleTaskCompleted}
             deleteTask={deleteTask}
+            editTask={editTask}
         />
     ));
 

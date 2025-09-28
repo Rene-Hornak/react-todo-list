@@ -19,6 +19,7 @@ export default function Form(props) {
 
     // Function runs every time the user types in the input
     function handleChange(event) {
+        // event.target.value - checks for input from keyboard (user typing)
         setName(event.target.value);
     }
 
