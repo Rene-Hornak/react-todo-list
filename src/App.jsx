@@ -5,11 +5,35 @@ import Todo from "./components/Todo";
 import { useState } from "react";
 import { nanoid } from "nanoid"; // generates unique IDs for each new task
 
+// Object that stores filter names and their corresponding functions 
+const FILTER_MAP = {
+    All: () => true,
+    Active: (task) => !task.completed,
+    Completed: (task) => task.completed
+}
+
+// This line creates an array of filter names from the FILTER_MAP object
+// The resulting array will be ["All", "Active", "Completed"]
+const FILTER_NAMES = Object.keys(FILTER_MAP);
+
 export default function App(props) {
     // State variable for all tasks (initially from props)
     const [tasks, setTasks] = useState(props.tasks);
 
-    // Function to add a new task to the list
+    // State variable for filter functionality (All, Active, Incomplete) 
+    const [filter, setFilter] = useState("All");
+
+    // Create an array of <FilterButton /> components from the filter names
+    const filterList = FILTER_NAMES.map((name) => (
+        <FilterButton 
+            key={name} 
+            name={name}
+            isPressed={name === filter}
+            setFilter={setFilter}
+        />
+    ));
+
+    // Function to add a new task to the list 
     function addTask(name) {
         const newTask = { id: `todo-${nanoid()}`, name, completed: false };
         // Spread existing tasks and add the new one
@@ -54,7 +78,7 @@ export default function App(props) {
     }
 
     // Create an array of <Todo /> components from the task list
-    const taskList = tasks?.map((task) => (
+    const taskList = tasks.filter(FILTER_MAP[filter]).map((task) => (
         <Todo 
             id={task.id} 
             name={task.name} 
@@ -76,16 +100,15 @@ export default function App(props) {
             <Form formSubmit={addTask} />
 
             <div className="filters btn-group stack-exception">
-                <FilterButton />
-                <FilterButton />
-                <FilterButton />
+                {filterList}
             </div>
 
             <h2 id="list-heading">{headingText}</h2>
             <ul
                 role="list"
                 className="todo-list stack-large stack-exception"
-                aria-labelledby="list-heading">
+                aria-labelledby="list-heading"
+            >
                 {taskList}
             </ul>
         </div>
