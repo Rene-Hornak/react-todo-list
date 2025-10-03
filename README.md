@@ -1,16 +1,46 @@
-# React + Vite
+# 📝 React To-Do List App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modular and responsive **To-Do List** application built with **React.js**.  
+The app demonstrates structured component-based design and state management using React hooks.  
+Users can efficiently **add**, **edit**, **delete**, and **filter** tasks (All, Active, Completed) through an intuitive interface.
 
-Currently, two official plugins are available:
+This project emphasizes clean React architecture, reusability, and maintainability, making it a solid example of a scalable front-end application.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+✅ Add new tasks  
+✅ Edit existing tasks  
+✅ Delete tasks  
+✅ Mark tasks as completed  
+✅ Filter tasks by **All**, **Active**, or **Completed**  
+✅ Dynamic task count display  
+✅ Fully responsive layout  
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🧩 Component Overview
+
+### **App.jsx**
+- The central component managing the app’s state.
+- Stores the list of tasks and handles:
+  - Adding a new task  
+  - Editing a task  
+  - Deleting a task  
+  - Toggling task completion  
+  - Filtering tasks  
+
+### **Form.jsx**
+- Handles user input for creating new tasks.
+- Validates that input is not empty before adding a task.
+
+### **Todo.jsx**
+- Represents a single task item.
+- Supports:
+  - Marking as complete/incomplete
+  - Editing task names
+  - Deleting tasks
+
+### **FilterButton.jsx**
+- Renders filter buttons to toggle between **All**, **Active**, and **Completed** tasks.
